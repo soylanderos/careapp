@@ -1,18 +1,44 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth/FirebaseServices';
+import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { FeedbackService } from './services/feedback/feedback.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+
+  isActive = false;
+
+  user$ = this.auth.authState$.pipe(
+    filter(state => state ? true : false)
+  )
+
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private FbService: FeedbackService,
+  ) {
+    //print user logged
+    this.user$.subscribe(user => {
+      console.log(user?.email);
+      if(!user){
+        console.log('no log')
+      }
+    })
+  }
+
+  async logout() {
+   await this.auth.logout()
+      .then(() => {
+        this.FbService.showToast('Sesión Cerrada');
+        this.router.navigate(['/login']);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 }

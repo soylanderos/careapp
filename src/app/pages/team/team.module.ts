@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { TeamPageRoutingModule } from './team-routing.module';
 
-import { FolderPage } from './folder.page';
+import { TeamPage } from './team.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    TeamPageRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [FolderPage]
+  declarations: [TeamPage]
 })
-export class FolderPageModule {}
+export class TeamPageModule {}

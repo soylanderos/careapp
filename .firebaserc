@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "carejrz-bbc0b": {
+      "hosting": {
+        "app": [
+          "carejrz-bbc0b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "carejrz-bbc0b"
+  }
+}

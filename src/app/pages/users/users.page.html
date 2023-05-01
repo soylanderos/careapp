@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Estudiantes</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar class="position-sticky"></ion-searchbar>
+  <div *ngFor="let estudiante of users">
+    <ion-card>
+      <ion-card-header>
+        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+        <ion-card-title>{{estudiante.name}} {{ estudiante.lastname }}</ion-card-title>
+        <ion-card-subtitle>{{estudiante.email}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

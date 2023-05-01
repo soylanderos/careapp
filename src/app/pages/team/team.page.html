@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Personal</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-segment [(ngModel)]="segmentValue" color="tertiary">
+    <ion-segment-button value="viewAll">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Ver Todos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="presentAlert()" value="register">
+      <ion-icon name="person-add-outline"></ion-icon>
+      <ion-label>Registrar</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="segmentValue === 'viewAll'">
+    <h1 class="p-3 mt-1">Todo tu personal</h1>
+    <ion-segment [(ngModel)]="team" value="default">
+      <ion-segment-button value="maestra">
+        <ion-label>Maestras</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="recepcion">
+        <ion-label>Recepcion</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="team === 'maestra'">
+      <div *ngFor="let maestra of maestras">
+        <ion-card>
+          <ion-card-header>
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+            <ion-card-title>{{maestra.name}} {{ maestra.lastname }}</ion-card-title>
+            <ion-card-subtitle>{{maestra.email}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+
+    <div *ngIf="team === 'recepcion'">
+      <div *ngFor="let recepcion of recepcionistas">
+        <ion-card>
+          <ion-card-header>
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+            <ion-card-title>{{ recepcion.name }} {{ recepcion.lastname }}</ion-card-title>
+            <ion-card-subtitle>{{ recepcion.email }}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+
+  </div>
+
+  <ion-content class="ion-padding" *ngIf="segmentValue === 'register'">
+    <h1>Registrar Personal</h1>
+
+      <form [formGroup]="registerFormPersonal" (ngSubmit)="register()">
+        <ng-container *ngFor="let campo of campos">
+          <ion-list>
+            <ng-container *ngIf="campo.type === 'radio'">
+              <ion-label> {{ campo.campo }}</ion-label>
+                <ion-select [formControlName]="campo.slug" aria-label="Fruit" interface="action-sheet" [placeholder]="campo.placeholder">
+                  <ion-select-option *ngFor="let opcion of campo.opciones" [value]="opcion.valor">{{ opcion }}</ion-select-option>
+                </ion-select>
+            </ng-container>
+            <ng-container *ngIf="campo.type !== 'radio'">
+              <ion-input [value]="miInput.value"  fill="outline" [type]="campo.type" [label]="campo.campo" labelPlacement="stacked"
+                [formControlName]="campo.slug" [placeholder]="campo.placeholder"></ion-input>
+            </ng-container>
+          </ion-list>
+        </ng-container>
+        <ion-button type="submit" [disabled]="registerFormPersonal.invalid" expand="block">Enviar</ion-button>
+      </form>
+  </ion-content>
+
+</ion-content>

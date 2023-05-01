@@ -1,0 +1,16 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="fields" novalidate (ngSubmit)="register()">
+    <ng-container *ngFor="let campo of campos">
+      <ion-list>
+        <ion-input [value]="miInput.value" fill="outline" [type]="campo.type" [label]="campo.campo" labelPlacement="stacked"
+        [formControlName]="campo.slug" [placeholder]="campo.placeholder" ></ion-input>
+      </ion-list>
+    </ng-container>
+    <ion-row>
+      <ion-col>
+        <ion-button id="btn-register" [disabled]="fields.invalid" type="submit" expand="block">Registrar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>
