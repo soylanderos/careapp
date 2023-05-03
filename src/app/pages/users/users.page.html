@@ -8,19 +8,31 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar class="position-sticky"></ion-searchbar>
-  <div *ngFor="let estudiante of users">
-    <ion-card>
-      <ion-card-header>
-        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-        <ion-card-title>{{estudiante.name}} {{ estudiante.lastname }}</ion-card-title>
-        <ion-card-subtitle>{{estudiante.email}}</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        Here's a small text description for the card content. Nothing more, nothing less.
-      </ion-card-content>
-    </ion-card>
-  </div>
+  <section class="pt-2" *ngFor="let user of users">
+    <div class="container h-100 mt-2">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-4">
+              <div class="d-flex text-black">
+                <div class="flex-shrink-0 profile-img">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/carejrz-bbc0b.appspot.com/o/prueba.jpeg?alt=media&token=32576991-e021-41bb-8cc0-a00a55066c2b"
+                    alt="Generic placeholder image" class="img-fluid">
+                </div>
+                <div class="flex-grow-1">
+                  <h5 class="mb-1">{{ user?.name }} {{ user?.firstname }}</h5>
+                  <p class="mb-2 pb-1" style="color: #2b2a2a;">{{ user?.email }}</p>
+                  <div class="d-flex pt-1">
+                    <button (click)="verUsuario(user)" type="button" class="btn btn-outline-primary me-1 flex-grow-1">Ver</button>
+                    <button type="button" class="btn btn-primary flex-grow-1">Chat</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </ion-content>

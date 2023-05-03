@@ -1,13 +1,27 @@
 .content {
    --background: background:#004AAD;
-    background: -webkit-linear-gradient(to right,#004AAD, #5271ff );  
-    background: linear-gradient(to right, #004AAD, #5271ff ); 
+    background: -webkit-linear-gradient(to right,#004AAD, #5271ff );
+    background: linear-gradient(to right, #004AAD, #5271ff );
+    background-size: 200% 100%;
+    animation: gradient 5s ease-in-out infinite;
+
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%; /* posición inicial del fondo */
+      }
+      50% {
+        background-position: 100% 50%; /* posición del fondo en la mitad de la animación */
+      }
+      100% {
+        background-position: 0% 50%; /* posición final del fondo */
+      }
+    }
 
    .header {
-        padding: 0 12vw;
-        margin-top: 12em;
+        padding: 10vw;
+        margin-top: 7em;
         color: #fff;
-        
+
         h3 {
             font-size: 1.5rem;
             color: #9d9bef;
@@ -24,7 +38,7 @@
 
     .login-form {
         padding: 0 12vw;
-        margin-top: 50px;
+        margin-top: 35px;
         ion-item {
             --background: #f8f8f8;
             --padding-start: 33px;
@@ -79,8 +93,9 @@
     .footer {
         color: #fff;
         padding: 0 12vw;
-        margin-top: 100px;
+        margin-top: 90px;
         text-align: center;
+        margin-bottom: 20px;
 
         h3 {
             font-size: 1rem;
@@ -102,13 +117,13 @@ ion-modal {
     --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --background: rgb(255, 255, 255);
   }
-  
+
   ion-modal::part(backdrop) {
     background: rgba(209, 213, 219);
     opacity: 1;
   }
-  
+
   ion-modal ion-toolbar {
-    --background: #FFD200;
+    --background:  #5271ff;
     --color: white;
   }

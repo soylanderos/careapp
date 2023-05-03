@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard'
+import { UserDetailComponent } from './components/users/user-detail/user-detail.component';
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: 'admin-config',
     loadChildren: () => import('./pages/admin-config/admin-config.module').then( m => m.AdminConfigPageModule)
+  },
+  {
+    path: 'user/:id',
+    component: UserDetailComponent
   }
 ];
 

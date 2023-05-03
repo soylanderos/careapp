@@ -1,10 +1,10 @@
 <ion-content class="content">
   <div class="header">
     <h3>Bienvenido</h3>
-    <h1>Inicia Sesion <br> para continuar</h1>
+    <h1>Inicia sesión para continuar</h1>
   </div>
 
- 
+
   <form [formGroup]="loginForm" novalidate (ngSubmit)="login()">
     <div class="login-form">
       <ion-item>
@@ -17,7 +17,7 @@
         <ion-input type="{{ inputType }}" placeholder="Contraseña" formControlName="password"></ion-input>
         <ion-icon *ngIf="loginForm.get('password') && loginForm.get('password')?.value"  name="{{ iconType }}" (click)="togglePassword()" slot="end"></ion-icon>
       </ion-item>
-   
+
       <div class="forget-password">
         <h3>Olvidaste tu contraseña?</h3>
       </div>
@@ -25,11 +25,10 @@
 
     <div class="login-button">
       <ion-button fill="clear" type="submit">
-      Iniciar sesion <ion-icon name="chevron-forward-outline"></ion-icon>
+      Iniciar sesión <ion-icon name="chevron-forward-outline"></ion-icon>
       </ion-button>
     </div>
   </form>
-
   <div class="footer">
     <h3>No tienes cuenta? <span id="open-modal">Info</span></h3>
   </div>
@@ -39,7 +38,7 @@
   <ion-modal #modal trigger="open-modal">
     <ng-template>
         <ion-toolbar>
-          <ion-title>Modal</ion-title>
+          <ion-title>Apoyo Escolar</ion-title>
           <ion-buttons slot="end">
             <ion-button color="light" (click)="modal.dismiss()">
               <ion-icon name="close"></ion-icon>
@@ -47,7 +46,19 @@
           </ion-buttons>
         </ion-toolbar>
         <ion-content>
-          <p>Contenido del modal</p>
+          <p style="text-align:center;">¡Bienvenido a nuestra aplicación de <b>Apoyo Escolar</b>!
+            Para poder disfrutar de todos los beneficios que ofrecemos,
+            necesitas contar con una cuenta de usuario activa.
+            <br>
+            Sin embargo, es importante que sepas que la activación de tu cuenta dependerá de la asociación
+            de <b>Apoyo Escolar</b> a la que te encuentres asociado.
+            <br>
+            Una vez que la asociación verifique tu información y confirme tu inscripción,
+            podrás acceder a nuestra plataforma con tu cuenta de usuario y
+            disfrutar de todas las funcionalidades que tenemos para ofrecerte.
+            <br>
+            <b>¡Gracias por confiar en nosotros!</b>
+          </p>
         </ion-content>
     </ng-template>
   </ion-modal>

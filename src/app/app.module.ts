@@ -24,26 +24,39 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { Capacitor } from '@capacitor/core';
+import { indexedDBLocalPersistence, initializeAuth } from 'firebase/auth';
+import { getApp } from 'firebase/app';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
-    AppRoutingModule, 
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     AuthGuardModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)), 
-    provideAnalytics(() => getAnalytics()), 
-    provideAuth(() => getAuth()), 
-    provideDatabase(() => getDatabase()), 
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAnalytics(() => getAnalytics()),
+    provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
-    provideFunctions(() => getFunctions()), 
-    provideMessaging(() => getMessaging()), 
-    providePerformance(() => getPerformance()), 
+    provideFunctions(() => getFunctions()),
+    provideMessaging(() => getMessaging()),
+    providePerformance(() => getPerformance()),
     provideRemoteConfig(() => getRemoteConfig()),
-    provideStorage(() => getStorage())],
+    provideStorage(() => getStorage()),
+    provideAuth(() => {
+			if (Capacitor.isNativePlatform()) {
+				return initializeAuth(getApp(), {
+					persistence: indexedDBLocalPersistence
+				});
+			} else {
+				return getAuth();
+			}
+		}),
+  ],
+
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ScreenTrackingService,UserTrackingService],
   bootstrap: [AppComponent],
 })

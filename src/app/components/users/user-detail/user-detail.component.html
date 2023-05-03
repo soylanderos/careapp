@@ -1,0 +1,26 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ usuario?.name }} {{ usuario?.firstname }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="d-flex justify-content-center">
+    <img src="https://firebasestorage.googleapis.com/v0/b/carejrz-bbc0b.appspot.com/o/prueba.jpeg?alt=media&token=32576991-e021-41bb-8cc0-a00a55066c2b"
+      alt="Generic placeholder image" class="img-fluid">
+  </div>
+  <p>Detalles del usuario:</p>
+  <ul>
+    <li><strong>Nombre:</strong> {{ usuario?.name }} {{ usuario?.firstname }} {{ usuario?.lastname }}</li>
+    <li><strong>Usuario:</strong> {{ usuario?.email }}</li>
+    <li><strong>Cumpleaños:</strong> {{ usuario?.birthday }}</li>
+    <li><strong>Tutor:</strong> {{ usuario?.tutor }}</li>
+    <!-- Agrega aquí otros detalles que quieras mostrar -->
+  </ul>
+</ion-content>
+

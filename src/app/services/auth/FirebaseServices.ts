@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Auth, authState , signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@angular/fire/auth';
-import { Firestore, CollectionReference, DocumentData, addDoc, collection, deleteDoc, doc, updateDoc, collectionData,} from '@angular/fire/firestore';
+import { Firestore, CollectionReference, addDoc, collection, deleteDoc, doc, updateDoc, collectionData, Query, docData} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { FeedbackService } from '../feedback/feedback.service';
 import { DocumentReference } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -104,7 +103,11 @@ export class AuthService {
   logout() {
     return this.afAuth.signOut();
   }
-  //collection students Functions
+  //functions estudiante
+  getEstudiante(id: string) {
+    const estudianteDocumentReference =  doc(this.firestore, `estudiantes/${id}`);
+    return docData(estudianteDocumentReference, { idField: 'id' });
+  }
   getAllEstudiantes() {
     return collectionData(this.estudianteCollection, {
       idField: 'id'

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/FirebaseServices';
-
+import { ModalController } from '@ionic/angular';
+import { UserDetailComponent } from '../../components/users/user-detail/user-detail.component'
 
 @Component({
   selector: 'app-users',
@@ -13,26 +14,27 @@ export class UsersPage implements OnInit {
 
   constructor(
     private afAuth: AuthService,
-  ) { }
-
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {
     this.getEstudiantes()
   }
+
   getEstudiantes(){
     this.afAuth.getAllEstudiantes().subscribe((data)=>{
       this.users = data;
-      console.log(this.users)
-      //print fields
-       this.users.forEach((element: any) => {
-        console.log(element.email)
-        console.log(element.name)
-        console.log(element.firstname)
-        console.log(element.lastname)
-        console.log(element.birthday)
-        console.log(element.tutor)
-       })
     })
+  }
+
+  async verUsuario(user: any) {
+    const modal = await this.modalController.create({
+      component: UserDetailComponent,
+      componentProps: {
+        usuario: user
+      }
+    });
+    await modal.present();
   }
 
 }
