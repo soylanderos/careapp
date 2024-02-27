@@ -47,6 +47,18 @@ const routes: Routes = [
   {
     path: 'user/:id',
     component: UserDetailComponent
+  },
+  {
+    path: 'citas',
+    loadChildren: () => import('./pages/citas/citas.module').then( m => m.CitasPageModule)
+  },
+  {
+    path: 'birthday',
+    loadChildren: () => import('./pages/birthday/birthday.module').then( m => m.BirthdayPageModule)
+  },
+  {
+    path: 'auto',
+    loadChildren: () => import('./pages/auto/auto.module').then( m => m.AutoPageModule)
   }
 ];
 

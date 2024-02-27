@@ -30,7 +30,7 @@ export class TeamPage implements OnInit {
     private FbService: FeedbackService,
     private alertController: AlertController
   ) {
-    this.personal = { uid: '', email: '', password: '', name: '', firstname: '', lastname: '', birthday: '', functionP: '', }
+    this.personal = { id: '', email: '', password: '', name: '', firstname: '', lastname: '', birthday: '', functionP: '', }
     this.registerFormPersonal = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -90,7 +90,8 @@ export class TeamPage implements OnInit {
       return;
     }
     if(this.registerFormPersonal.valid) {
-      console.log('niceeeee');
+      this.FbService.showToast('Usuario creado correctamente');
+      this.registerFormPersonal.reset();
     }
   }
 
@@ -107,9 +108,6 @@ export class TeamPage implements OnInit {
   getPersonalMaestras() {
     this.afAuth.getAllPersonal().subscribe((data) => {
       this.maestras = data.filter((persona) => persona.functionP === 'Maestra');
-      console.log(this.maestras);
-      console.log(this.maestras);
-
     })
   }
 

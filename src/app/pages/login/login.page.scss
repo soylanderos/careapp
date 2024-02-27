@@ -2,20 +2,6 @@
    --background: background:#004AAD;
     background: -webkit-linear-gradient(to right,#004AAD, #5271ff );
     background: linear-gradient(to right, #004AAD, #5271ff );
-    background-size: 200% 100%;
-    animation: gradient 5s ease-in-out infinite;
-
-    @keyframes gradient {
-      0% {
-        background-position: 0% 50%; /* posición inicial del fondo */
-      }
-      50% {
-        background-position: 100% 50%; /* posición del fondo en la mitad de la animación */
-      }
-      100% {
-        background-position: 0% 50%; /* posición final del fondo */
-      }
-    }
 
    .header {
         padding: 10vw;

@@ -8,31 +8,33 @@
 </ion-header>
 
 <ion-content>
-  <section class="pt-2" *ngFor="let user of users">
-    <div class="container h-100 mt-2">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-4">
-              <div class="d-flex text-black">
-                <div class="flex-shrink-0 profile-img">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/carejrz-bbc0b.appspot.com/o/prueba.jpeg?alt=media&token=32576991-e021-41bb-8cc0-a00a55066c2b"
-                    alt="Generic placeholder image" class="img-fluid">
-                </div>
-                <div class="flex-grow-1">
-                  <h5 class="mb-1">{{ user?.name }} {{ user?.firstname }}</h5>
-                  <p class="mb-2 pb-1" style="color: #2b2a2a;">{{ user?.email }}</p>
-                  <div class="d-flex pt-1">
-                    <button (click)="verUsuario(user)" type="button" class="btn btn-outline-primary me-1 flex-grow-1">Ver</button>
-                    <button type="button" class="btn btn-primary flex-grow-1">Chat</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <ion-card (click)="verUsuario(user)" *ngFor="let user of users"  color="tertiary">
+    <ion-card-header color="primary">
+      <ion-card-title style="color: #fff">{{ user?.name }} {{ user?.firstname }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content  color="tertiary">
+      <ion-item class="mt-2" style="border-radius: 20px;">
+        <ion-avatar slot="start">
+          <img [src]="user?.profile || 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="Imagen de perfil">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ user?.name }} {{ user?.firstname }} {{ user?.lastname}}</h2>
+          <p>{{ user?.email }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item color="tertiary">
+        <ion-icon slot="start" name="home"></ion-icon>
+        <ion-label>Tutor: {{ user?.tutor }}</ion-label>
+      </ion-item>
+
+      <ion-item color="tertiary">
+        <ion-icon slot="start" name="call"></ion-icon>
+        <ion-label>Contacto: {{ user?.phone }}</ion-label>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

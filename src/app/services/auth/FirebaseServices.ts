@@ -28,10 +28,9 @@ export class AuthService {
   ) { }
 
   //register Estudiantes
-   register(email: string, password: string, name: string, firstname: string, lastname: string, birthday: string, tutor: string,) {
-      const user = this.afAuth.currentUser;
-      const uid = user?.uid;
-     addDoc(this.estudianteCollection, <Estudiante> { uid, email, password, name, firstname, lastname, birthday, tutor }).then((documentReference: DocumentReference) => {
+   register(email: string, password: string, id: string, name: string, firstname: string, lastname: string, birthday: string, tutor: string, phone: string) {
+
+     addDoc(this.estudianteCollection, <Estudiante> { id , email, password, name, firstname, lastname, birthday, tutor, phone }).then((documentReference: DocumentReference) => {
      console.log(`Document written with ID: ${documentReference.id}`);
       createUserWithEmailAndPassword(this.afAuth, email, password)
       .then(() => {
@@ -55,9 +54,8 @@ export class AuthService {
 
   //register Personal
   registerPersonal(email: string, password: string, name: string, firstname: string, lastname: string, birthday: string, functionP: string,) {
-    const user = this.afAuth.currentUser;
-    const uid = user?.uid;
-    addDoc(this.personalCollection, <Personal> { uid, email, password, name, firstname, lastname, birthday, functionP }).then((documentReference: DocumentReference) => {
+
+    addDoc(this.personalCollection, <Personal> { email, password, name, firstname, lastname, birthday, functionP }).then((documentReference: DocumentReference) => {
     console.log(`Document written with ID: ${documentReference.id}`);
     })
     createUserWithEmailAndPassword(this.afAuth, email, password)
@@ -117,15 +115,15 @@ export class AuthService {
   UpdateEstudiante(Estudiante: Estudiante) {
     const estudianteDocumentReference = doc(
       this.firestore,
-      `estudiantes/${Estudiante.uid}`
+      `estudiantes/${Estudiante}`
     );
     return updateDoc(estudianteDocumentReference, { ...Estudiante });
   }
 
-  deleteEstudiante(uid: string) {
+  deleteEstudiante(id: string) {
     const estudianteDocumentReference = doc(
       this.firestore,
-      `estudiantes/${uid}`
+      `estudiantes/${id}`
     );
     return deleteDoc(estudianteDocumentReference);
   }
@@ -153,15 +151,15 @@ export class AuthService {
   UpdatePersonal(Personal: Personal) {
     const personalDocumentReference = doc(
       this.firestore,
-      `personal/${Personal.uid}`
+      `personal/${Personal.id}`
     );
     return updateDoc(personalDocumentReference, { ...Personal });
   }
 
-  deletePersonal(uid: string) {
+  deletePersonal(id: string) {
     const personalDocumentReference = doc(
       this.firestore,
-      `personal/${uid}`
+      `personal/${id}`
     );
     return deleteDoc(personalDocumentReference);
   }
@@ -169,7 +167,6 @@ export class AuthService {
 }
 
 export interface Personal {
-  uid: string;
   email: string;
   password: string;
   name: string;
@@ -177,14 +174,16 @@ export interface Personal {
   lastname: string;
   birthday: string;
   functionP: string;
+  id: string
 }
 
 export interface Estudiante{
-  uid: string,
+  id: string,
   email: string,
   name: string,
   firstname: string,
   lastname: string,
   birthday: string,
-  tutor: string
+  tutor: string,
+  phone: string
 }

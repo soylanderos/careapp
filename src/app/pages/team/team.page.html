@@ -65,13 +65,11 @@
 
   <ion-content class="ion-padding" *ngIf="segmentValue === 'register'">
     <h1>Registrar Personal</h1>
-
       <form [formGroup]="registerFormPersonal" (ngSubmit)="register()">
         <ng-container *ngFor="let campo of campos">
           <ion-list>
             <ng-container *ngIf="campo.type === 'radio'">
-              <ion-label> {{ campo.campo }}</ion-label>
-                <ion-select [formControlName]="campo.slug" aria-label="Fruit" interface="action-sheet" [placeholder]="campo.placeholder">
+                <ion-select [formControlName]="campo.slug" fill="outline" label="Puesto" label-placement="stacked" interface="action-sheet" [placeholder]="campo.placeholder">
                   <ion-select-option *ngFor="let opcion of campo.opciones" [value]="opcion.valor">{{ opcion }}</ion-select-option>
                 </ion-select>
             </ng-container>

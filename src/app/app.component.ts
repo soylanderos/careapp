@@ -16,7 +16,7 @@ export class AppComponent {
   user$ = this.auth.authState$.pipe(
     filter(state => state ? true : false)
   )
-
+ 
   constructor(
     private auth: AuthService,
     private router: Router,

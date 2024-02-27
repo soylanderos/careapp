@@ -1,46 +1,29 @@
 {
-  "root": true,
-  "ignorePatterns": ["projects/**/*"],
-  "overrides": [
-    {
-      "files": ["*.ts"],
-      "parserOptions": {
-        "project": ["tsconfig.json"],
-        "createDefaultProgram": true
-      },
-      "extends": [
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
-      "rules": {
-        "@angular-eslint/component-class-suffix": [
-          "error",
-          {
-            "suffixes": ["Page", "Component"]
-          }
-        ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
-          }
-        ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
-        ]
-      }
+    "env": {
+        "browser": true,
+        "es2021": true
     },
-    {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
-      "rules": {}
+    "extends": "standard-with-typescript",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+      "semi": ["error", "always"], // Requiere punto y coma al final de cada declaración
+      "quotes": ["error", "single"], // Requiere comillas simples para cadenas
+      "indent": ["error", 4], // Define la indentación a 4 espacios
+      "no-unused-vars": "error", // Advierte sobre variables declaradas pero no utilizadas
+      "no-console": "warn", // Advierte sobre el uso de console.log y similares
+      "no-undef": "error", // Advierte sobre variables no definidas
+      "prefer-const": "error", // Favorece el uso de const en lugar de let cuando sea posible
+      "comma-dangle": ["error", "only-multiline"], // Requiere coma al final de la última propiedad en objetos de varias líneas
+      "arrow-body-style": ["error", "as-needed"], // Sugiere el uso de expresiones de función de flecha más concisas
+      "arrow-spacing": "error", // Requiere espacios alrededor de las flechas de función
+      "object-shorthand": "error", // Sugiere el uso de métodos de abreviación de propiedades en objetos
+      "prefer-arrow-callback": "error", // Sugiere el uso de funciones de flecha para devolver valores de función
+      "no-extra-semi": "error", // Advierte sobre puntos y comas innecesarios
+      "no-trailing-spaces": "error", // Advierte sobre espacios en blanco innecesarios al final de las líneas
+      "space-before-function-paren": "error", // Requiere un espacio antes del paréntesis de apertura de una función
+      "no-multiple-empty-lines": ["error", { "max": 1 }] // Advierte sobre múltiples líneas vacías consecutivas
     }
-  ]
 }

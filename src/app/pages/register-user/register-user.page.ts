@@ -16,8 +16,6 @@ export class RegisterUserPage implements OnInit {
 
   alertButtons = ['OK'];
 
-
-
   constructor(
     private fb: FormBuilder,
     private alertController: AlertController
@@ -28,7 +26,7 @@ export class RegisterUserPage implements OnInit {
     this.presentAlert();
   }
   ngOnInit() {
-  
+
   }
   //Functions
   async presentAlert() {
