@@ -4,13 +4,72 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="setOpen(true)">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">citas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list>
+    <!-- Itera a través de las citas y muestra cada una en un item -->
+    <ion-item-group *ngFor="let appointment of appointments">
+      <ion-item-divider>
+        <ion-label>
+          <h2>Cita con {{ appointment.name }}</h2>
+          <p>Email: {{ appointment.email }}</p>
+          <p>Teléfono: {{ appointment.phone.slice(3) }}</p>
+          <p>Fecha y Hora: {{ appointment.startDate | date: 'short' }}</p>
+          <p>Duración: {{ calculateDuration(appointment.startDate, appointment.endData) }}</p>
+        </ion-label>
+      </ion-item-divider>
+    </ion-item-group>
+  </ion-list>
+
+  <!-- Modal para agregar una nueva cita -->
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Agregar Cita</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="setOpen(false)">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-item>
+          <ion-label labelPlacement="stacked">Nombre</ion-label>
+          <ion-input [(ngModel)]="newAppointment.name" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label labelPlacement="stacked">Email</ion-label>
+          <ion-input type="email" [(ngModel)]="newAppointment.email" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label labelPlacement="stacked">Teléfono</ion-label>
+          <ion-input [(ngModel)]="newAppointment.phone" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label labelPlacement="stacked">Fecha de Inicio</ion-label>
+          <ion-datetime display-format="DD/MM/YYYY HH:mm" [(ngModel)]="newAppointment.startDate" required ></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label labelPlacement="stacked">Fecha de Fin</ion-label>
+          <ion-datetime display-format="DD/MM/YYYY HH:mm" [(ngModel)]="newAppointment.endData" required></ion-datetime>
+        </ion-item>
+
+        <ion-button expand="full" (click)="addAppointment()">Agregar Cita</ion-button>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+  </ion-modal>
 </ion-content>
