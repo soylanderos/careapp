@@ -50,6 +50,8 @@ const routes: Routes = [
   },
   {
     path: 'citas',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
     loadChildren: () => import('./pages/citas/citas.module').then( m => m.CitasPageModule)
   },
   {

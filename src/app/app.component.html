@@ -3,10 +3,10 @@
       <ion-content>
         <div class="menu-header-bg"></div>
         <ng-container *ngIf="user$ | async as user">
-          <div class="header-content">
+          <div routerLinkActive="active" routerLink="home"  class="header-content">
             <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
               <ion-label >
-                <h2>Hola</h2>
+                <h2> {{ formatUserName(user.email) }}</h2>
                 <h3>{{user.email}}</h3>
               </ion-label>
           </div>
@@ -28,7 +28,7 @@
             <ion-icon name="calendar"></ion-icon>
             <ion-label>Citas</ion-label>
           </ion-item>
-  <!-- 
+  <!--
           <ion-item routerLinkActive="active" routerLink="auto">
             <ion-icon name="paper-plane"></ion-icon>
             <ion-label>Automatizacion</ion-label>

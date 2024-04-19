@@ -16,7 +16,7 @@ export class AppComponent {
   user$ = this.auth.authState$.pipe(
     filter(state => state ? true : false)
   )
- 
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -41,4 +41,16 @@ export class AppComponent {
         console.error(error);
       });
   }
+
+  formatUserName(email: string | null): string {
+    // Si email es null o undefined, devuelve una cadena vacía o un valor por defecto
+    if (!email) {
+        return '';
+    }
+    // Extrae la parte antes de @
+    const namePart = email.split('@')[0];
+    // Convierte la primera letra a mayúscula y el resto a minúscula
+    const formattedName = namePart.charAt(0).toUpperCase() + namePart.slice(1).toLowerCase();
+    return formattedName;
+}
 }

@@ -1,0 +1,32 @@
+ion-toolbar {
+  --background:  background: linear-gradient(to right, #004AAD, #5271ff );
+  background: -webkit-linear-gradient(to right,#004AAD, #5271ff );
+  background: linear-gradient(to right, #004AAD, #5271ff );
+  --color: #ffffff;
+  --font-weight: 500;
+}
+
+
+.appointments-container {
+  /* Usa un diseño grid para organizar las tarjetas */
+  display: grid;
+  grid-template-columns: 1fr; /* Cambia el número de columnas según la pantalla */
+  gap: 2px; /* Espacio entre tarjetas */
+  padding: 10px; /* Espacio interno en el contenedor */
+}
+
+.appointment-card {
+  /* Estilo para las tarjetas */
+  height: 200px; /* Establece una altura fija para las tarjetas */
+  padding: 15px; /* Espacio interno en la tarjeta */
+  display: flex;
+  flex-direction: column; /* Organiza el contenido verticalmente */
+  justify-content: center; /* Centra el contenido verticalmente */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras para las tarjetas */
+}
+
+ion-icon {
+  color: white;
+}
+

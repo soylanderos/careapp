@@ -13,20 +13,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <!-- Itera a través de las citas y muestra cada una en un item -->
-    <ion-item-group *ngFor="let appointment of appointments">
-      <ion-item-divider>
-        <ion-label>
-          <h2>Cita con {{ appointment.name }}</h2>
-          <p>Email: {{ appointment.email }}</p>
-          <p>Teléfono: {{ appointment.phone.slice(3) }}</p>
-          <p>Fecha y Hora: {{ appointment.startDate | date: 'short' }}</p>
-          <p>Duración: {{ calculateDuration(appointment.startDate, appointment.endData) }}</p>
-        </ion-label>
-      </ion-item-divider>
-    </ion-item-group>
-  </ion-list>
+  <!-- Lista de citas -->
+  <div class="appointments-container">
+    <ion-card *ngFor="let appointment of appointments" class="appointment-card">
+        <ion-card-header>
+            <ion-card-title>
+                Cita con {{ appointment.name }}
+            </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <p><strong>Email:</strong> {{ appointment.email }}</p>
+            <p><strong>Teléfono:</strong> {{ appointment.phone.slice(3) }}</p>
+            <p><strong>Fecha y Hora:</strong> {{ appointment.startDate | date: 'short' }}</p>
+            <p><strong>Duración:</strong> {{ calculateDuration(appointment.startDate, appointment.endData) }}</p>
+        </ion-card-content>
+    </ion-card>
+  </div>
 
   <!-- Modal para agregar una nueva cita -->
   <ion-modal [isOpen]="isModalOpen">
