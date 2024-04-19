@@ -8,28 +8,28 @@
 </ion-header>
 
 <ion-content>
-  <ion-card (click)="verUsuario(user)" *ngFor="let user of users"  color="tertiary">
+  <ion-card (click)="verUsuario(user)" *ngFor="let user of users" >
     <ion-card-header color="primary">
       <ion-card-title style="color: #fff">{{ user?.name }} {{ user?.firstname }}</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content  color="tertiary">
-      <ion-item class="mt-2" style="border-radius: 20px;">
-        <ion-avatar slot="start">
-          <img [src]="user?.profile || 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="Imagen de perfil">
-        </ion-avatar>
-        <ion-label>
-          <h2>{{ user?.name }} {{ user?.firstname }} {{ user?.lastname}}</h2>
-          <p>{{ user?.email }}</p>
-        </ion-label>
+    <ion-card-content>
+      <ion-item class="correo">
+          <ion-avatar slot="start">
+            <img [src]="user?.profile || 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="Imagen de perfil">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ user?.name }} {{ user?.firstname }} {{ user?.lastname}}</h2>
+            <p>{{ user?.email }}</p>
+          </ion-label>
       </ion-item>
 
-      <ion-item color="tertiary">
+      <ion-item>
         <ion-icon slot="start" name="home"></ion-icon>
         <ion-label>Tutor: {{ user?.tutor }}</ion-label>
       </ion-item>
 
-      <ion-item color="tertiary">
+      <ion-item>
         <ion-icon slot="start" name="call"></ion-icon>
         <ion-label>Contacto: {{ user?.phone }}</ion-label>
       </ion-item>

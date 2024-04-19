@@ -112,13 +112,22 @@ export class AuthService {
     }) as Observable<Estudiante[]>
   }
 
-  UpdateEstudiante(Estudiante: Estudiante) {
-    const estudianteDocumentReference = doc(
-      this.firestore,
-      `estudiantes/${Estudiante}`
-    );
-    return updateDoc(estudianteDocumentReference, { ...Estudiante });
+    async updateEstudiante(estudiante: Estudiante): Promise<void> {
+      try {
+          if (!estudiante.id) {
+              throw new Error('ID de estudiante no proporcionado');
+          }
+          const estudianteDocumentReference = doc(this.firestore, `estudiantes/${estudiante.id}`);
+          //feedback service
+          this.FbService.showToast('Estudiante actualizado correctamente');
+          // Pasa un objeto plano a updateDoc
+          await updateDoc(estudianteDocumentReference, { ...estudiante });
+
+      } catch (error) {
+          console.error('Error actualizando estudiante:', error);
+      }
   }
+
 
   deleteEstudiante(id: string) {
     const estudianteDocumentReference = doc(

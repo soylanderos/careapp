@@ -48,12 +48,26 @@ export class UserDetailComponent  implements OnInit {
     });
   }
 
-  UpdateEstudiante() {
+  async UpdateEstudiante(): Promise<void> {
+    // Crea el nuevo campo
     const nuevoCampo = { maestra: this.miss };
+
+    // Combina el objeto `this.usuario` con `nuevoCampo`
     const estudianteActualizado = { ...this.usuario, ...nuevoCampo };
-    this.authService.UpdateEstudiante(estudianteActualizado);
-    this.cerrarModal();
+
+    try {
+      // Espera a que la operación de actualización finalice
+      await this.authService.updateEstudiante(estudianteActualizado);
+
+      console.log('Estudiante actualizado correctamente');
+
+      // Cerrar modal si es necesario
+      this.cerrarModal();
+    } catch (error) {
+      console.error('Error actualizando estudiante:', error);
+    }
   }
+
   calcularEdad() {
     const fechaNacimiento = this.usuario.birthday;
     const fechaNacimientoObj = new Date(fechaNacimiento);
@@ -61,5 +75,10 @@ export class UserDetailComponent  implements OnInit {
     const diferenciaMilisegundos = fechaActual.getTime() - fechaNacimientoObj.getTime();
     const edad = Math.floor(diferenciaMilisegundos / 1000 / 60 / 60 / 24 / 365);
     this.edad = edad;
+  }
+
+  DeleteEstudiante(){
+    this.authService.deleteEstudiante(this.usuario.id);
+    this.cerrarModal();
   }
 }

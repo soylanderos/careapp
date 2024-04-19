@@ -5,7 +5,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-segment [(ngModel)]="segmentValue" color="tertiary">
+  <ion-segment [(ngModel)]="segmentValue" class="navbar">
     <ion-segment-button value="viewAll">
       <ion-icon name="person-outline"></ion-icon>
       <ion-label>Ver Todos</ion-label>
@@ -17,8 +17,8 @@
   </ion-segment>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div *ngIf="segmentValue === 'viewAll'">
+<ion-content [fullscreen]="true" class="full">
+  <div *ngIf="segmentValue === 'viewAll'" class="content">
     <h1 class="p-3 mt-1">Todo tu personal</h1>
     <ion-segment [(ngModel)]="team" value="default">
       <ion-segment-button value="maestra">
