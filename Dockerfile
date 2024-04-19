@@ -1,29 +1,29 @@
-FROM node:lts-alpine
+# Usar una imagen base de Node.js
+FROM node:16 AS build
 
-# Instala el servidor HTTP de npm de manera global en el contenedor
-RUN npm install -g http-server
-
-# Establece el directorio de trabajo en el contenedor
+# Configurar el directorio de trabajo
 WORKDIR /usr/src/app
 
-# Copia el archivo package.json y el package-lock.json (si existe) al directorio de trabajo
+# Copiar los archivos de package.json y package-lock.json
 COPY package*.json ./
 
-# Crea un directorio diferente para la instalación de los módulos npm
-RUN mkdir -p /usr/src/node_modules && \
-    ln -s /usr/src/node_modules /usr/src/app/node_modules
+# Instalar las dependencias
+RUN npm ci
 
-# Instala los módulos npm utilizando el package.json
-RUN npm install
-
-# Copia todos los archivos del contexto de construcción al directorio de trabajo en el contenedor
+# Copiar el resto de los archivos
 COPY . .
 
-# Ejecuta el comando para construir la aplicación (suponemos que este comando es para construir tu aplicación)
+# Construir la aplicación Ionic
 RUN npm run build
 
-# Expone el puerto 8080 para acceder a la aplicación desde fuera del contenedor
-EXPOSE 8080
+# Usar una imagen base de Nginx para servir la aplicación
+FROM nginx:alpine
 
-# Comando que se ejecuta al iniciar el contenedor, inicia el servidor HTTP para servir la aplicación
-CMD [ "http-server", "dist" ]
+# Copiar el contenido de build a la carpeta de contenido de Nginx
+COPY --from=build /usr/src/app/www /usr/share/nginx/html
+
+# Exponer el puerto 80
+EXPOSE 80
+
+# Configurar el punto de entrada
+CMD ["nginx", "-g", "daemon off;"]
